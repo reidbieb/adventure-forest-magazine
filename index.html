@@ -799,6 +799,115 @@
   }
   .content-locked { display: none; }
   .content-locked.unlocked { display: block; }
+
+  /* ===================== */
+  /* RESPONSIVE            */
+  /* ===================== */
+  @media (max-width: 1024px) {
+    .image-text {
+      grid-template-columns: 1fr;
+    }
+    .image-text.reversed { direction: ltr; }
+    .image-side {
+      min-height: 45vh;
+    }
+    .text-side {
+      padding: 8vw;
+    }
+    .lodging-grid {
+      grid-template-columns: 1fr;
+    }
+    .lodging-grid-item {
+      min-height: 300px;
+    }
+    .lodging-grid-item.text-cell {
+      padding: 8vw;
+    }
+    .zero-grid {
+      grid-template-columns: 1fr;
+      max-width: 100%;
+    }
+    .numbers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .ticket-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .phasing-options {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .market-stats {
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .spread {
+      min-height: 100svh;
+    }
+    .decline,
+    .gap,
+    .audience,
+    .numbers,
+    .tickets,
+    .phasing,
+    .close {
+      padding: 10vw 6vw;
+    }
+    .cover-content {
+      padding: 8vw 6vw;
+    }
+    .cover-title {
+      font-size: clamp(3rem, 14vw, 6rem);
+    }
+    .text-side {
+      padding: 10vw 6vw;
+    }
+    .text-side h2 {
+      font-size: clamp(1.5rem, 6vw, 2.2rem);
+    }
+    .image-side {
+      min-height: 40vh;
+    }
+    .numbers-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    .ticket-grid {
+      grid-template-columns: 1fr;
+    }
+    .audience-list {
+      gap: 1.2rem;
+    }
+    .audience-item {
+      font-size: 1.1rem;
+    }
+    .chart-bar {
+      height: 28px;
+    }
+    .chart-value {
+      font-size: 0.75rem;
+    }
+    .body-text {
+      max-width: 100%;
+    }
+    .lodging-hero {
+      height: 45vh;
+    }
+    .lodging-hero-overlay h2 {
+      font-size: clamp(1.8rem, 7vw, 3rem);
+    }
+    .close-bullets p {
+      font-size: 1.05rem;
+    }
+    .numbers-footnote {
+      max-width: 100%;
+    }
+    .market-stat .number {
+      font-size: 2rem;
+    }
+  }
 </style>
 </head>
 <body>
