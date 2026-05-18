@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adventure Forest — CLIMB Works Smoky Mountains</title>
+<title>Adventure Forest — A Decision Document</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -16,13 +16,13 @@
     --orange: #E0803F;
     --warm-gray: #1a1a1a;
     --mid-gray: #2a2a2a;
+    --dim-gray: #555;
     --text-gray: #999;
+    --light-gray: #ccc;
   }
 
   html {
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
   }
 
   body {
@@ -30,15 +30,20 @@
     background: var(--black);
     color: var(--white);
     -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
   }
 
   .spread {
     min-height: 100vh;
-    scroll-snap-align: start;
     display: flex;
     position: relative;
     overflow: hidden;
+    padding: 4vw 5vw;
   }
+
+  .spread.center { align-items: center; }
+  .spread.bottom { align-items: flex-end; }
+  .spread.top { align-items: flex-start; }
 
   /* Typography */
   h1, h2, h3, .syne {
@@ -49,11 +54,15 @@
     line-height: 0.95;
   }
 
+  h1 { font-size: clamp(3rem, 9vw, 7.5rem); }
+  h2 { font-size: clamp(1.8rem, 4.5vw, 3.6rem); margin-bottom: 1.5rem; }
+  h3 { font-size: clamp(1.4rem, 3vw, 2.2rem); margin-bottom: 0.75rem; }
+
   .section-label {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
     font-size: 0.85rem;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--green);
     margin-bottom: 1.5rem;
@@ -62,7 +71,7 @@
   .section-label::before {
     content: '';
     display: block;
-    width: 32px;
+    width: 36px;
     height: 3px;
     background: var(--green);
     margin-bottom: 1rem;
@@ -70,15 +79,15 @@
 
   .body-text {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     line-height: 1.6;
-    color: #ccc;
-    max-width: 520px;
+    color: var(--light-gray);
+    max-width: 780px;
+    margin-bottom: 1rem;
   }
 
-  .body-text strong {
-    color: var(--white);
-  }
+  .body-text strong { color: var(--white); }
+  .body-text.lead { font-size: 1.55rem; max-width: 900px; }
 
   .stat-number {
     font-family: 'Syne', sans-serif;
@@ -88,1389 +97,1398 @@
 
   .green-text { color: var(--green); }
   .orange-text { color: var(--orange); }
+  .white-text { color: var(--white); }
+  .dim-text { color: var(--text-gray); font-size: 0.95rem; }
 
-  /* ===================== */
-  /* SPREAD 1: COVER       */
-  /* ===================== */
-  .cover {
-    background: var(--black);
-    position: relative;
+  .footnote {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    font-style: italic;
+    margin-top: 2rem;
+    max-width: 580px;
   }
 
-  .cover-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .cover-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.1) 100%);
-  }
-
-  .cover-content {
-    position: relative;
-    z-index: 2;
+  /* Reusable containers */
+  .col {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4vw;
+    width: 100%;
+    align-items: center;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* COVER */
+  .cover { background: var(--black); position: relative; padding: 0; }
+  .cover-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .cover-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.2) 100%);
+  }
+  .cover-content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
     justify-content: flex-end;
     padding: 5vw;
-    height: 100%;
+    width: 100%; min-height: 100vh;
   }
-
-  .cover-title {
-    font-size: clamp(4rem, 9vw, 10rem);
-    line-height: 0.88;
+  .cover-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
     margin-bottom: 2rem;
   }
-
+  .cover-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.5rem, 12vw, 11rem);
+    line-height: 0.85;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
   .cover-subtitle {
     font-family: 'Instrument Serif', serif;
-    font-size: 1.4rem;
-    color: #ccc;
     font-style: italic;
-    margin-bottom: 3rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--light-gray);
+    max-width: 600px;
+    margin-bottom: 1rem;
   }
-
   .cover-meta {
     font-family: 'Syne', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #555;
-  }
-
-  /* ===================== */
-  /* SPREAD 2: THE DECLINE */
-  /* ===================== */
-  .decline {
-    background: var(--black);
-    flex-direction: column;
-    justify-content: center;
-    padding: 5vw 8vw;
-  }
-
-  .decline h2 {
-    font-size: clamp(2rem, 3.5vw, 3.5rem);
-    margin-bottom: 1rem;
-    max-width: 900px;
-  }
-
-  .decline .body-text {
-    margin-bottom: 4rem;
-  }
-
-  .chart {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    width: 100%;
-    max-width: 900px;
-  }
-
-  .chart-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .chart-year {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    width: 50px;
-    color: #666;
-    text-align: right;
-  }
-
-  .chart-bar {
-    height: 36px;
-    background: var(--green);
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 12px;
-    transition: width 1s ease;
-  }
-
-  .chart-bar.peak { background: var(--orange); }
-  .chart-bar.current { background: #c0392b; }
-
-  .chart-value {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
     font-size: 0.85rem;
-    color: var(--black);
-  }
-
-  .chart-note {
-    font-family: 'Instrument Serif', serif;
-    font-size: 0.9rem;
-    color: #555;
-    margin-left: 8px;
-  }
-
-  .decline-stat {
-    margin-top: 3rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem;
-    color: #666;
-  }
-
-  .decline-stat span {
-    color: #c0392b;
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 0.3rem;
-  }
-
-  /* ===================== */
-  /* SPREAD 3: THE GAP     */
-  /* ===================== */
-  .gap {
-    background: var(--warm-gray);
-    flex-direction: column;
-    justify-content: center;
-    padding: 5vw 8vw;
-  }
-
-  .gap h2 {
-    font-size: clamp(2.5rem, 5vw, 5rem);
-    margin-bottom: 3rem;
-    max-width: 900px;
-  }
-
-  .zero-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 900px;
-    margin-bottom: 4rem;
-  }
-
-  .zero-card {
-    border-left: 3px solid var(--green);
-    padding-left: 1.5rem;
-  }
-
-  .zero-card .zero {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 2.5rem;
-    color: var(--green);
-    margin-bottom: 0.3rem;
-  }
-
-  .zero-card p {
-    font-size: 1.1rem;
-    color: #999;
-    line-height: 1.4;
-  }
-
-  .market-stats {
-    display: flex;
-    gap: 4rem;
-    flex-wrap: wrap;
-  }
-
-  .market-stat .number {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 2.8rem;
-    color: var(--orange);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-
-  .market-stat .label {
-    font-size: 1rem;
-    color: #777;
-  }
-
-  /* ===================== */
-  /* SPREAD 4: WHO WE REACH */
-  /* ===================== */
-  .audience {
-    background: var(--black);
-    flex-direction: column;
-    justify-content: center;
-    padding: 5vw 8vw;
-  }
-
-  .audience h2 {
-    font-size: clamp(1.8rem, 3vw, 3rem);
-    margin-bottom: 3rem;
-    max-width: 900px;
-  }
-
-  .audience-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: 800px;
-  }
-
-  .audience-item {
-    font-size: 1.25rem;
-    line-height: 1.5;
-    color: #999;
-    padding-left: 0;
-  }
-
-  .audience-item strong {
-    color: var(--white);
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    display: block;
-    margin-bottom: 0.2rem;
-  }
-
-  .audience-cta {
-    margin-top: 3rem;
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.3rem;
-    color: var(--green);
-  }
-
-  /* ========================= */
-  /* SPREAD 5+: IMAGE + TEXT   */
-  /* ========================= */
-  .image-text {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--black);
-  }
-
-  .image-text.reversed {
-    direction: rtl;
-  }
-  .image-text.reversed > * {
-    direction: ltr;
-  }
-
-  .image-side {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .image-side img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .text-side {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 5vw;
-  }
-
-  .text-side h2 {
-    font-size: clamp(1.8rem, 2.8vw, 2.8rem);
-    margin-bottom: 2rem;
-    max-width: 100%;
-  }
-
-  .text-side ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-
-  .text-side li {
-    font-size: 1.15rem;
-    color: #999;
-    line-height: 1.5;
-    padding-left: 1rem;
-    position: relative;
-  }
-
-  .text-side li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: #444;
-  }
-
-  .text-side li strong {
-    color: var(--green);
-  }
-
-  /* ===================== */
-  /* SPREAD 9: LODGING     */
-  /* ===================== */
-  .lodging {
-    flex-direction: column;
-    background: var(--black);
-  }
-
-  .lodging-hero {
-    position: relative;
-    height: 60vh;
-    min-height: 400px;
-    overflow: hidden;
-  }
-
-  .lodging-hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .lodging-hero-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 3vw 5vw;
-    background: linear-gradient(transparent, rgba(0,0,0,0.85));
-  }
-
-  .lodging-hero-overlay h2 {
-    font-size: clamp(2rem, 3.5vw, 3.5rem);
-    max-width: 900px;
-  }
-
-  .lodging-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    flex: 1;
-  }
-
-  .lodging-grid-item {
-    position: relative;
-    overflow: hidden;
-    min-height: 250px;
-  }
-
-  .lodging-grid-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .lodging-grid-item.text-cell {
-    background: var(--warm-gray);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2.5rem;
-  }
-
-  .lodging-grid-item.text-cell p {
-    font-size: 1.15rem;
-    color: #999;
-    line-height: 1.6;
-  }
-
-  .lodging-grid-item.text-cell .comp-line {
-    margin-top: 1.5rem;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .comp-table {
+    color: var(--text-gray);
     margin-top: 1rem;
+  }
+
+  /* EDITOR'S NOTE */
+  .editor {
+    background: var(--black);
+    padding: 6vw 5vw;
+  }
+  .editor .container { max-width: 900px; }
+  .editor h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 2rem;
+  }
+  .editor .body-text {
+    max-width: none;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .signature {
+    margin-top: 3rem;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--text-gray);
+  }
+
+  /* MARKET CASE */
+  .market { background: var(--warm-gray); position: relative; }
+  .market-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+  }
+  .market-content {
+    position: relative; z-index: 2;
     width: 100%;
-    border-collapse: collapse;
-  }
-
-  .comp-table td {
-    padding: 0.4rem 0;
-    font-size: 1rem;
-    color: #999;
-    border-bottom: 1px solid #333;
-  }
-
-  .comp-table td:first-child {
-    color: #666;
-    width: 45%;
-  }
-
-  .comp-table td:nth-child(2) {
-    color: #555;
-    text-align: center;
-    font-size: 0.9rem;
-  }
-
-  .comp-table td:last-child {
-    color: var(--green);
-    text-align: right;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-  }
-
-  /* ===================== */
-  /* SPREAD: NUMBERS       */
-  /* ===================== */
-  .numbers {
-    background: var(--warm-gray);
-    flex-direction: column;
+    display: flex; flex-direction: column;
     justify-content: center;
-    padding: 5vw 8vw;
   }
-
-  .numbers h2 {
-    font-size: clamp(2.5rem, 5vw, 5rem);
-    margin-bottom: 4rem;
-  }
-
-  .numbers-grid {
+  .stat-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 3rem;
-    width: 100%;
-    margin-bottom: 4rem;
+    gap: 2vw;
+    margin-top: 2rem;
   }
-
-  .number-card .value {
+  .stat {
+    border-left: 2px solid var(--green);
+    padding-left: 1.2rem;
+  }
+  .stat .num {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: clamp(2rem, 3.5vw, 3.5rem);
-    color: var(--orange);
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    color: var(--white);
     line-height: 1;
     margin-bottom: 0.5rem;
   }
-
-  .number-card .desc {
-    font-size: 1.2rem;
-    color: #777;
+  .stat .label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+  .stat .note {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin-top: 0.5rem;
     line-height: 1.4;
   }
 
-  .numbers-footnote {
-    font-size: 1rem;
-    color: #555;
-    max-width: 600px;
-    line-height: 1.5;
+  /* DRIVE BAR */
+  .drive { background: var(--black); }
+  .drive ul.examples {
+    list-style: none;
+    margin: 2rem 0;
+  }
+  .drive ul.examples li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--mid-gray);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .drive ul.examples li:last-child { border-bottom: none; }
+  .drive ul.examples .name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    color: var(--white);
+    letter-spacing: 0.05em;
+  }
+  .drive ul.examples .why {
+    font-family: 'Instrument Serif', serif;
     font-style: italic;
+    color: var(--light-gray);
+    flex: 1;
+    text-align: right;
+    min-width: 200px;
   }
 
-  /* ===================== */
-  /* SPREAD: BREAKDOWN     */
-  /* ===================== */
-  .breakdown {
-    background: var(--black);
-    flex-direction: column;
-    justify-content: center;
-    padding: 5vw 8vw;
+  /* ANAKEESTA REFRAME */
+  .anakeesta { background: var(--warm-gray); }
+  .anakeesta-quote {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    line-height: 1.4;
+    color: var(--white);
+    border-left: 4px solid var(--orange);
+    padding-left: 2rem;
+    margin: 2rem 0;
+    max-width: 800px;
   }
-
-  .breakdown h2 {
-    font-size: clamp(2rem, 3.5vw, 3.5rem);
-    margin-bottom: 3rem;
-  }
-
-  .breakdown-columns {
+  .moat-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    width: 100%;
+    gap: 2vw;
+    margin-top: 2.5rem;
   }
-
-  .breakdown-table {
-    width: 100%;
-    border-collapse: collapse;
+  .moat-col h3 { color: var(--green); margin-bottom: 1rem; }
+  .moat-col.against h3 { color: var(--orange); }
+  .moat-col ul {
+    list-style: none;
   }
-
-  .breakdown-table td {
-    padding: 0.55rem 0;
+  .moat-col li {
+    padding: 0.6rem 0;
+    color: var(--light-gray);
     font-size: 1.1rem;
-    color: #888;
-    border-bottom: 1px solid #222;
-    line-height: 1.3;
+    border-bottom: 1px dashed var(--mid-gray);
   }
 
-  .breakdown-table td:last-child {
+  /* WAIVER DATA */
+  .waiver { background: var(--black); }
+  .age-chart {
+    margin: 2rem 0;
+    max-width: 700px;
+  }
+  .age-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 80px;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+  }
+  .age-row .age-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    letter-spacing: 0.08em;
+  }
+  .age-row .age-bar {
+    height: 22px;
+    background: var(--mid-gray);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .age-row .age-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--orange));
+    transition: width 0.5s;
+  }
+  .age-row .age-pct {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    color: var(--white);
+    text-align: right;
+  }
+  .age-row.highlight .age-bar-fill { background: var(--orange); }
+  .age-row.highlight .age-label { color: var(--orange); }
+
+  /* TAM EXPANSION */
+  .tam { background: var(--warm-gray); }
+  .tam-blocks {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    gap: 2vw;
+    align-items: center;
+    margin: 2.5rem 0;
+  }
+  .tam-block {
+    background: var(--mid-gray);
+    border: 1px solid var(--dim-gray);
+    border-radius: 4px;
+    padding: 2rem;
+    text-align: center;
+  }
+  .tam-block .label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-gray);
+    margin-bottom: 1rem;
+  }
+  .tam-block .tam-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    line-height: 1;
+  }
+  .tam-block.expanded .tam-num { color: var(--green); }
+  .tam-block .tam-desc {
+    font-size: 0.95rem;
+    color: var(--light-gray);
+    margin-top: 1rem;
+  }
+  .tam-arrow {
+    text-align: center;
+    color: var(--green);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+  }
+
+  /* PHASE 1 HEADER */
+  .phase1-header { background: var(--black); position: relative; }
+  .phase1-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.45;
+  }
+  .phase1-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.6) 100%);
+  }
+  .phase1-header .col { position: relative; z-index: 2; width: 100%; }
+
+  /* PHASE 1 GRID */
+  .phase1-grid { background: var(--warm-gray); }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+    width: 100%;
+  }
+  .feature {
+    background: var(--mid-gray);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .feature-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .feature-body {
+    padding: 1.2rem;
+    flex: 1;
+  }
+  .feature-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+  }
+  .feature-desc {
+    font-size: 0.9rem;
+    color: var(--light-gray);
+    line-height: 1.5;
+  }
+  .deferred-note {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border: 1px dashed var(--dim-gray);
+    border-radius: 4px;
+    background: rgba(0,0,0,0.3);
+  }
+  .deferred-note .label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 0.5rem;
+  }
+  .deferred-note p {
+    font-size: 1rem;
+    color: var(--light-gray);
+  }
+
+  /* INVESTMENT */
+  .invest { background: var(--black); }
+  .invest-table {
+    width: 100%;
+    max-width: 900px;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+  }
+  .invest-table th, .invest-table td {
+    padding: 0.85rem 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--mid-gray);
+    font-size: 0.95rem;
+  }
+  .invest-table th {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-gray);
+    font-weight: 700;
+  }
+  .invest-table td.num {
     text-align: right;
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 1rem;
-    color: #999;
-    white-space: nowrap;
-  }
-
-  .breakdown-table tr.subtotal td {
-    border-top: 2px solid #333;
-    color: var(--white);
-    font-weight: bold;
-  }
-  .breakdown-table tr.subtotal td:last-child {
     color: var(--white);
   }
-
-  .breakdown-table tr.total td {
+  .invest-table tr.total td {
     border-top: 2px solid var(--green);
     border-bottom: none;
-    color: var(--green);
-    font-weight: bold;
-    font-size: 1.15rem;
-    padding-top: 0.8rem;
-  }
-  .breakdown-table tr.total td:last-child {
-    color: var(--green);
+    padding-top: 1.2rem;
     font-size: 1.1rem;
   }
-
-  /* ===================== */
-  /* SPREAD: TICKETS       */
-  /* ===================== */
-  .tickets {
-    background: var(--black);
-    flex-direction: column;
-    justify-content: center;
-    padding: 5vw 8vw;
+  .invest-table tr.total td.num {
+    color: var(--orange);
+    font-size: 1.5rem;
+  }
+  .placeholder-tag {
+    display: inline-block;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(224,128,63,0.2);
+    color: var(--orange);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    margin-left: 0.5rem;
+  }
+  .grounded-tag {
+    display: inline-block;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(163,187,44,0.2);
+    color: var(--green);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    margin-left: 0.5rem;
   }
 
-  .tickets h2 {
-    font-size: clamp(2rem, 3.5vw, 3.5rem);
-    margin-bottom: 3rem;
-  }
-
-  .ticket-grid {
+  /* PRICING */
+  .pricing { background: var(--warm-gray); }
+  .pricing-cols {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1.5rem;
-    width: 100%;
-    margin-bottom: 3rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 2vw;
+    margin-top: 2rem;
   }
-
-  .ticket-card {
-    border-top: 3px solid #333;
+  .price-card {
+    background: var(--mid-gray);
+    border-radius: 6px;
+    padding: 2rem;
+    border-top: 4px solid var(--green);
+  }
+  .price-card.premium { border-top-color: var(--orange); }
+  .price-card .thesis-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    margin-bottom: 0.3rem;
+  }
+  .price-card.premium .thesis-name { color: var(--orange); }
+  .price-card h3 { color: var(--white); }
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px dashed var(--dim-gray);
+    font-size: 1rem;
+  }
+  .price-row:last-of-type { border-bottom: none; }
+  .price-row .label { color: var(--light-gray); }
+  .price-row .val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .price-card .argument {
+    margin-top: 1.5rem;
     padding-top: 1.5rem;
+    border-top: 1px solid var(--dim-gray);
+    font-style: italic;
+    color: var(--light-gray);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .price-benchmark {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(0,0,0,0.4);
+    border-radius: 4px;
+    font-size: 0.95rem;
+  }
+  .price-benchmark .label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-gray);
+    margin-bottom: 0.75rem;
+  }
+  .price-benchmark .row {
+    display: flex; justify-content: space-between; padding: 0.3rem 0;
+    color: var(--light-gray);
   }
 
-  .ticket-card.highlight {
-    border-top-color: var(--green);
+  /* REVENUE */
+  .revenue { background: var(--black); }
+  .rev-table {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+  }
+  .rev-table th, .rev-table td {
+    padding: 0.75rem;
+    text-align: right;
+    border-bottom: 1px solid var(--mid-gray);
+  }
+  .rev-table th:first-child, .rev-table td:first-child {
+    text-align: left;
+  }
+  .rev-table th {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 700;
+  }
+  .rev-table td.line {
+    font-family: 'Instrument Serif', serif;
+    color: var(--light-gray);
+  }
+  .rev-table td.num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .rev-table tr.bold td {
+    color: var(--orange);
+    border-top: 2px solid var(--green);
+    padding-top: 1rem;
   }
 
-  .ticket-price {
+  /* TRIGGER */
+  .trigger { background: var(--warm-gray); }
+  .trigger-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .trigger-card {
+    background: var(--mid-gray);
+    border-radius: 6px;
+    padding: 2rem;
+    border-top: 4px solid var(--green);
+  }
+  .trigger-card.conditional { border-top-color: var(--orange); }
+  .trigger-card.hold { border-top-color: #c0392b; }
+  .trigger-card .threshold {
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: clamp(1.8rem, 2.5vw, 2.5rem);
-    color: var(--orange);
-    line-height: 1;
+    font-size: 2rem;
+    color: var(--white);
     margin-bottom: 0.5rem;
   }
-
-  .ticket-card.highlight .ticket-price {
-    color: var(--green);
-  }
-
-  .ticket-name {
+  .trigger-card .verdict {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--white);
-    margin-bottom: 0.6rem;
+    color: var(--green);
+    margin-bottom: 1rem;
   }
-
-  .ticket-desc {
-    font-size: 1.05rem;
-    color: #777;
+  .trigger-card.conditional .verdict { color: var(--orange); }
+  .trigger-card.hold .verdict { color: #c0392b; }
+  .trigger-card p {
+    color: var(--light-gray);
+    font-size: 1rem;
     line-height: 1.5;
   }
 
-  .ticket-note {
+  /* FULL VISION */
+  .vision { background: var(--black); position: relative; }
+  .vision-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+  }
+  .vision-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 100%);
+  }
+  .vision .container { position: relative; z-index: 2; }
+  .vision-phases {
+    list-style: none;
+    margin-top: 2rem;
+  }
+  .vision-phases li {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 1.5rem;
+    align-items: baseline;
+  }
+  .vision-phases .year {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    color: var(--green);
+    font-size: 1.2rem;
+  }
+  .vision-phases .what {
     font-family: 'Instrument Serif', serif;
     font-size: 1.1rem;
-    color: #555;
-    font-style: italic;
+    color: var(--light-gray);
   }
-
-  /* ===================== */
-  /* SPREAD: PHASING       */
-  /* ===================== */
-  .phasing {
-    background: var(--black);
-    flex-direction: column;
-    justify-content: center;
-    padding: 5vw 8vw;
-  }
-
-  .phasing h2 {
-    font-size: clamp(2rem, 3.5vw, 3.5rem);
-    margin-bottom: 3rem;
-  }
-
-  .phasing-options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    width: 100%;
-  }
-
-  .phasing-option {
-    border-top: 3px solid #333;
-    padding-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .option-header {
-    margin-bottom: 1.5rem;
-  }
-
-  .option-header h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .option-strategy {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.05rem;
-    color: var(--green);
-    font-style: italic;
-    line-height: 1.4;
-  }
-
-  .option-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex: 1;
-    margin-bottom: 1.5rem;
-  }
-
-  .option-phase {
-    font-size: 1.05rem;
-    color: #888;
-    line-height: 1.45;
-  }
-
-  .option-yr {
+  .vision-phases .amt {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 0.8rem;
-    color: #555;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-right: 0.5rem;
+    color: var(--white);
+    font-size: 1rem;
   }
 
-  .option-footer {
-    border-top: 1px solid #333;
-    padding-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+  /* DECISIONS */
+  .decisions { background: var(--warm-gray); }
+  .decisions ol {
+    counter-reset: step;
+    list-style: none;
+    margin-top: 2rem;
   }
-
-  .option-capex {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: var(--orange);
-    letter-spacing: 0.03em;
-  }
-
-  .option-note {
-    font-size: 0.95rem;
-    color: #555;
-    line-height: 1.4;
-  }
-
-  /* ===================== */
-  /* SPREAD: CLOSE         */
-  /* ===================== */
-  .close {
-    background: var(--black);
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 5vw 8vw;
-  }
-
-  .close h2 {
-    font-size: clamp(2rem, 3.5vw, 3.5rem);
-    max-width: 1000px;
-    margin-bottom: 2rem;
-  }
-
-  .close-bullets {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    margin-bottom: 4rem;
-  }
-
-  .close-bullets p {
-    font-size: 1.2rem;
-    color: #777;
+  .decisions ol li {
+    counter-increment: step;
+    padding: 1.25rem 0 1.25rem 4rem;
+    position: relative;
+    border-bottom: 1px solid var(--mid-gray);
+    font-size: 1.15rem;
+    color: var(--light-gray);
     line-height: 1.5;
   }
+  .decisions ol li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 1.25rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--green);
+    line-height: 1;
+  }
+  .decisions ol li strong {
+    color: var(--white);
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .open-deps {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(0,0,0,0.4);
+    border-left: 3px solid var(--orange);
+    border-radius: 4px;
+  }
+  .open-deps .label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 0.75rem;
+  }
+  .open-deps p { color: var(--light-gray); font-size: 1rem; line-height: 1.6; margin-bottom: 0.5rem; }
 
-  .close-meta {
+  /* CLOSING */
+  .closing {
+    background: var(--black);
+    padding: 8vw 5vw;
+    text-align: center;
+  }
+  .closing h2 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    margin-bottom: 2rem;
+  }
+  .closing p {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--light-gray);
+    max-width: 700px;
+    margin: 0 auto 1rem;
+  }
+  .closing .meta {
+    margin-top: 3rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-gray);
+  }
+
+  /* GATE */
+  .gate {
+    position: fixed; inset: 0;
+    background: var(--black);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+  .gate h1 {
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .gate .gate-eyebrow {
     font-family: 'Syne', sans-serif;
     font-size: 0.75rem;
     letter-spacing: 0.2em;
+    color: var(--green);
     text-transform: uppercase;
-    color: #333;
-  }
-  /* ===================== */
-  /* PASSWORD GATE         */
-  /* ===================== */
-  .gate {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: var(--black);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-  .gate.hidden { display: none; }
-  .gate h1 {
-    font-size: 1.5rem;
-    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
   }
   .gate input {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    padding: 0.8rem 1.2rem;
-    background: var(--warm-gray);
-    border: 2px solid #333;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--white);
     color: var(--white);
-    border-radius: 4px;
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+    width: 280px;
     text-align: center;
-    width: 260px;
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.1em;
+    margin-top: 2rem;
     outline: none;
   }
-  .gate input:focus { border-color: var(--green); }
-  .gate .gate-error {
-    font-family: 'Instrument Serif', serif;
-    font-size: 0.95rem;
+  .gate input::placeholder { color: var(--text-gray); letter-spacing: 0.05em; }
+  .gate-error {
     color: #c0392b;
-    height: 1.2rem;
+    margin-top: 1rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    min-height: 1rem;
   }
   .content-locked { display: none; }
   .content-locked.unlocked { display: block; }
 
-  /* ===================== */
-  /* RESPONSIVE            */
-  /* ===================== */
-  @media (max-width: 1024px) {
-    .image-text {
-      grid-template-columns: 1fr;
-    }
-    .image-text.reversed { direction: ltr; }
-    .image-side {
-      min-height: 45vh;
-    }
-    .text-side {
-      padding: 8vw;
-    }
-    .lodging-grid {
-      grid-template-columns: 1fr;
-    }
-    .lodging-grid-item {
-      min-height: 300px;
-    }
-    .lodging-grid-item.text-cell {
-      padding: 8vw;
-    }
-    .zero-grid {
-      grid-template-columns: 1fr;
-      max-width: 100%;
-    }
-    .numbers-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .ticket-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .phasing-options {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-    .breakdown-columns {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-    .breakdown-table td {
-      font-size: 0.95rem;
-    }
-    .breakdown-table td:last-child {
-      font-size: 0.9rem;
-      padding-left: 1rem;
-    }
-    .market-stats {
-      gap: 2rem;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .spread {
-      min-height: 100svh;
-    }
-    .decline,
-    .gap,
-    .audience,
-    .numbers,
-    .tickets,
-    .phasing,
-    .close {
-      padding: 10vw 6vw;
-    }
-    .cover-content {
-      padding: 8vw 6vw;
-    }
-    .cover-title {
-      font-size: clamp(3rem, 14vw, 6rem);
-    }
-    .text-side {
-      padding: 10vw 6vw;
-    }
-    .text-side h2 {
-      font-size: clamp(1.5rem, 6vw, 2.2rem);
-    }
-    .image-side {
-      min-height: 40vh;
-    }
-    .numbers-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-    .ticket-grid {
-      grid-template-columns: 1fr;
-    }
-    .audience-list {
-      gap: 1.2rem;
-    }
-    .audience-item {
-      font-size: 1.1rem;
-    }
-    .chart-bar {
-      height: 28px;
-    }
-    .chart-value {
-      font-size: 0.75rem;
-    }
-    .body-text {
-      max-width: 100%;
-    }
-    .lodging-hero {
-      height: 45vh;
-    }
-    .lodging-hero-overlay h2 {
-      font-size: clamp(1.8rem, 7vw, 3rem);
-    }
-    .close-bullets p {
-      font-size: 1.05rem;
-    }
-    .numbers-footnote {
-      max-width: 100%;
-    }
-    .market-stat .number {
-      font-size: 2rem;
-    }
+  /* MOBILE */
+  @media (max-width: 900px) {
+    .spread { padding: 6vw 5vw; }
+    .two-col { grid-template-columns: 1fr; gap: 2rem; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .moat-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .features { grid-template-columns: 1fr; }
+    .pricing-cols { grid-template-columns: 1fr; }
+    .trigger-grid { grid-template-columns: 1fr; }
+    .tam-blocks { grid-template-columns: 1fr; gap: 1.5rem; }
+    .tam-arrow { transform: rotate(90deg); }
+    .vision-phases li { grid-template-columns: 60px 1fr; }
+    .vision-phases .amt { grid-column: 1 / -1; padding-left: 60px; }
+    .rev-table { font-size: 0.8rem; }
+    .rev-table th, .rev-table td { padding: 0.5rem 0.3rem; }
   }
 </style>
 </head>
 <body>
 
+<!-- ==================== GATE ==================== -->
 <div class="gate" id="gate">
-  <h1 class="syne">CLIMB Works</h1>
+  <div class="gate-eyebrow">CLIMB Works · Internal</div>
+  <h1 class="syne">Adventure Forest</h1>
   <input type="password" id="gate-input" placeholder="Enter password" autofocus>
   <div class="gate-error" id="gate-error"></div>
 </div>
 
 <div class="content-locked" id="content">
 
-<!-- ================================ -->
-<!-- SPREAD 1: COVER                  -->
-<!-- ================================ -->
+<!-- ==================== COVER ==================== -->
 <section class="spread cover">
-  <img class="cover-bg" src="output/adventure-forest/swimming-hole-wide.png" alt="Natural swimming hole concept">
+  <img class="cover-bg" src="output/adventure-forest/swimming-hole-wide.png" alt="Adventure Forest swim hole">
   <div class="cover-overlay"></div>
   <div class="cover-content">
-    <h1 class="cover-title syne">Adventure<br>Forest</h1>
-    <p class="cover-subtitle">The next phase of CLIMB Works Smoky Mountains</p>
-    <p class="cover-meta">Vision Deck &nbsp;/&nbsp; Internal &nbsp;/&nbsp; April 2026</p>
+    <div class="cover-eyebrow">A Decision Document</div>
+    <h1 class="cover-title">Adventure<br>Forest</h1>
+    <p class="cover-subtitle">Is the Smokies worth the bet? If so — how much, and what do we build?</p>
+    <p class="cover-meta">CLIMB Works · Phase 1 Proposal · May 2026</p>
   </div>
 </section>
 
-<!-- ================================ -->
-<!-- SPREAD 2: THE DECLINE            -->
-<!-- ================================ -->
-<section class="spread decline">
-  <div class="section-label">The Opportunity</div>
-  <h2 class="syne">The tour is solid.<br>The audience is narrow.</h2>
-  <p class="body-text" style="margin-bottom: 3rem;">Our Smokies zipline tour is still profitable. But year-over-year guest growth hasn't just slowed — it's falling. And the product only serves one customer: the person willing to zipline.</p>
+<!-- ==================== EDITOR'S NOTE ==================== -->
+<section class="spread editor center">
+  <div class="container col">
+    <div class="section-label">Editor's Note</div>
+    <h2>This isn't a pitch. It's a tool to decide.</h2>
 
-  <div class="chart">
-    <div class="chart-row">
-      <span class="chart-year">2019</span>
-      <div class="chart-bar" style="width: 65%"><span class="chart-value">33,532</span></div>
-    </div>
-    <div class="chart-row">
-      <span class="chart-year">2020</span>
-      <div class="chart-bar" style="width: 64%"><span class="chart-value">33,098</span></div>
-    </div>
-    <div class="chart-row">
-      <span class="chart-year">2021</span>
-      <div class="chart-bar peak" style="width: 100%"><span class="chart-value">43,454</span></div>
-      <span class="chart-note">post-COVID peak</span>
-    </div>
-    <div class="chart-row">
-      <span class="chart-year">2022</span>
-      <div class="chart-bar" style="width: 73%"><span class="chart-value">35,679</span></div>
-    </div>
-    <div class="chart-row">
-      <span class="chart-year">2023</span>
-      <div class="chart-bar" style="width: 51%"><span class="chart-value">29,592</span></div>
-    </div>
-    <div class="chart-row">
-      <span class="chart-year">2024</span>
-      <div class="chart-bar" style="width: 41%"><span class="chart-value">26,563</span></div>
-    </div>
-    <div class="chart-row">
-      <span class="chart-year">2025</span>
-      <div class="chart-bar current" style="width: 29%"><span class="chart-value">23,194</span></div>
-    </div>
-  </div>
+    <p class="body-text">
+      We've spent months sketching what CW Smokies could become — a swim hole, hot springs, treepods, a full destination. The vision is real. But before we commit millions of dollars to it, we need to answer one question honestly: <strong>is the Smokies actually worth the bet, and if so, how much?</strong> I think it's an incredible market to be in if we build the right thing.
+    </p>
 
-  <div class="decline-stat">
-    <span class="syne" style="color: #c0392b">-31%</span>
-    below 2019 levels. Declining every year since the post-COVID bump.
+    <p class="body-text">
+      A few facts make this question harder, not easier. Our zipline business is down 35% from its 2021 peak. The Pigeon Forge corridor is saturated with attractions and cabins. We're 12 miles from downtown Gatlinburg — a new product has to be worth it for people to make the drive. And lodging average day rate in our market is dropping, not rising.
+    </p>
+
+    <p class="body-text">
+      But the trends are also moving toward us. Soft-adventure and wellness tourism are growing 50% faster than overall tourism. There is no commercial swim hole, no hot springs, no wellness-in-nature anywhere in the Smokies. The 13 million people who come here every year have nowhere to be in water that isn't a man-made waterpark.
+    </p>
+
+    <p class="body-text">
+      This document isn't trying to sell anyone on the vision. It's trying to help us keep the Smokies conversation going because we've got to get moving in order to hit next summer. It lays out what we'd build in Phase 1 by Summer 2027 (roughly $10M — we can still add/take away), what the volume case is (backed by 275,000 of our own waivers), where we're still placeholder-ing numbers, and what would need to be true in Year 1 to commit to Phase 2.
+    </p>
+
+    <p class="body-text">
+      Our mission has always been to get people outside their comfort zones in safe, controlled environments. For years that's meant adrenaline. <strong>I think we can broaden that — without losing it.</strong> Soaking in a hot spring, plunging in cold water, wading a rocky creek, going phone-free in the woods — these are all comfort-zone work for the average person. They're just a different kind. And they happen to be the kind that pulls a much larger share of who's already here.
+    </p>
   </div>
 </section>
 
-<!-- ================================ -->
-<!-- SPREAD 3: THE GAP                -->
-<!-- ================================ -->
-<section class="spread gap">
-  <div class="section-label">The Market</div>
-  <h2 class="syne">What nobody has built yet.</h2>
+<!-- ==================== THE MARKET CASE ==================== -->
+<section class="spread market center">
+  <img class="market-bg" src="output/smokies-landscape.jpg" alt="Smoky Mountains landscape">
+  <div class="container market-content">
+    <div class="section-label">The Market Case</div>
+    <h2>Thirteen million<br>are already here.</h2>
+    <p class="body-text lead">Sevier County tourism is bigger than most people realize. The gap isn't volume — it's product. There's nowhere in the corridor to be in water, soak in thermal pools, or experience nature without a thrill ride attached.</p>
 
-  <div class="zero-grid">
-    <div class="zero-card">
-      <div class="zero">ZERO</div>
-      <p>Natural or naturalistic swimming attractions in Sevier County</p>
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="num">13.2M</div>
+        <div class="label">Annual Visitors</div>
+        <div class="note">Sevier County 2024 · +10% YoY</div>
+      </div>
+      <div class="stat">
+        <div class="num">$3.93B</div>
+        <div class="label">Visitor Spending</div>
+        <div class="note">2024 · 95% from non-locals</div>
+      </div>
+      <div class="stat">
+        <div class="num">49%</div>
+        <div class="label">First-Time Visitors</div>
+        <div class="note">2025 · up from 36% YoY</div>
+      </div>
+      <div class="stat">
+        <div class="num">$0</div>
+        <div class="label">Natural Swim / Hot Springs</div>
+        <div class="note">Zero in the entire corridor</div>
+      </div>
     </div>
-    <div class="zero-card">
-      <div class="zero">ZERO</div>
-      <p>Hot springs or thermal bathing anywhere in the Smokies corridor</p>
-    </div>
-    <div class="zero-card">
-      <div class="zero">ZERO</div>
-      <p>Nature-immersive lodging at scale in the region</p>
-    </div>
-  </div>
 
-  <div class="market-stats">
-    <div class="market-stat">
-      <div class="number">12M+</div>
-      <div class="label">annual GSMNP visitors</div>
-    </div>
-    <div class="market-stat">
-      <div class="number">$3.93B</div>
-      <div class="label">Sevier County visitor spending</div>
-    </div>
-    <div class="market-stat">
-      <div class="number">21,600</div>
-      <div class="label">cabin listings (53% avg occupancy)</div>
-    </div>
-    <div class="market-stat">
-      <div class="number">80+ min</div>
-      <div class="label">to nearest commercial hot springs</div>
-    </div>
+    <p class="footnote">Sources: Sevier County Tourism Authority 2024 Annual Report; Pigeon Forge DOT Tourism Barometer (July 2025); NPS Visitor Experience Stewardship surveys.</p>
   </div>
 </section>
 
-<!-- ================================ -->
-<!-- SPREAD 4: WHO WE REACH           -->
-<!-- ================================ -->
-<section class="spread audience">
-  <div class="section-label">Missing Demographics</div>
-  <h2 class="syne">Adventure Forest opens the door to everyone we can't serve today.</h2>
+<!-- ==================== THE DRIVE BAR ==================== -->
+<section class="spread drive center">
+  <div class="container col">
+    <div class="section-label">The Drive Bar</div>
+    <h2>Twelve miles from town is real.</h2>
+    <p class="body-text lead">A new product has to be compelling enough to pull a guest who's already in Gatlinburg twelve miles out — past dozens of in-town attractions. That's a higher bar than "is it cool."</p>
 
-  <div class="audience-list">
-    <div class="audience-item">
-      <strong>Young families (kids under 7)</strong>
-      Too young for zipline. Perfect for play elements + splash zone.
-    </div>
-    <div class="audience-item">
-      <strong>The "not for me" crowd</strong>
-      Guests who think ziplining is too adventurous, don't meet height/weight requirements, or have physical limitations.
-    </div>
-    <div class="audience-item">
-      <strong>Couples + relaxers</strong>
-      Hot springs + food + forest walk. No adrenaline required.
-    </div>
-    <div class="audience-item">
-      <strong>Locals + repeat visitors</strong>
-      The zipline tour is a once-or-twice experience. The swimming hole is a summer-long draw.
-    </div>
-    <div class="audience-item">
-      <strong>Existing zip guests upgrading</strong>
-      A $40 add-on to turn a 2.5-hour visit into a half-day.
-    </div>
-  </div>
+    <p class="body-text" style="margin-top: 2rem;">Drive-out attractions in the Smokies corridor share a pattern. They're either iconic-branded, genuinely unmatched, photo-bait that earns social proof, or destination-committed via lodging:</p>
 
-  <p class="audience-cta">Our move: broaden the audience AND extend the visit.</p>
-</section>
-
-<!-- ================================ -->
-<!-- SPREAD 5: THE SWIMMING HOLE      -->
-<!-- ================================ -->
-<section class="spread image-text">
-  <div class="image-side">
-    <img src="output/adventure-forest/swimming-hole-wide.png" alt="Swimming hole concept">
-  </div>
-  <div class="text-side">
-    <div class="section-label">The Anchor</div>
-    <h2 class="syne">The element that makes this a home run.</h2>
-    <p class="body-text" style="margin-bottom: 1.5rem;">Built to look like a natural spring discovered in the woods — not a pool.</p>
-    <ul>
-      <li>Boulder-edged, irregular shape, cascading waterfall</li>
-      <li>Clear blue-green water, stone decking, wood lounge areas</li>
-      <li>It has to feel like it was always there. Real stone, hand-sculpted finishes — that's where the cost goes.</li>
-      <li><strong>This is the element guests will drive to, post about, and come back for</strong></li>
+    <ul class="examples">
+      <li><span class="name">Dollywood</span><span class="why">Iconic brand · 3M+ visitors</span></li>
+      <li><span class="name">Cades Cove</span><span class="why">The drive is the product · 2M+ visits</span></li>
+      <li><span class="name">Townsend Y</span><span class="why">Free water · families willing to drive</span></li>
+      <li><span class="name">Bolt Farm Treehouse</span><span class="why">Lodging-committed guests</span></li>
+      <li><span class="name">CW Zipline (today)</span><span class="why">Unmatched experience · 32K guests</span></li>
     </ul>
+
+    <p class="body-text" style="margin-top: 2rem;">CW Smokies' existing zipline clears the drive bar at 32,000 guests. Adventure Forest needs to clear it at <strong>70-100K+</strong> — meaning it has to be ~2-3x as compelling, or appeal to 2-3x as many guest segments.</p>
+
+    <p class="body-text"><em>The strategic frame: don't try to grow the Smokies market by luring guests who aren't already here. Win share of the 13 million who are.</em></p>
   </div>
 </section>
 
-<!-- ================================ -->
-<!-- SPREAD 6: HOT SPRINGS            -->
-<!-- ================================ -->
-<section class="spread image-text reversed">
-  <div class="image-side">
-    <img src="output/adventure-forest/hot-springs-tubs.png" alt="Hot springs concept">
+<!-- ==================== ANAKEESTA REFRAME ==================== -->
+<section class="spread anakeesta center">
+  <div class="container col">
+    <div class="section-label">The Model We're Borrowing</div>
+    <h2>Adventure as a feeling,<br>not a requirement.</h2>
+
+    <p class="anakeesta-quote">
+      "Most of what there is to do at Anakeesta is walk, sit, eat, drink, shop — surrounded by mountain and forest views. The zipline and the coaster are optional. They sell the feeling of being adventurous without requiring much from guests to get it."
+    </p>
+
+    <p class="body-text">
+      We're not trying to match Anakeesta's scale. We're borrowing the playbook: nature immersion as the product, activities as the upcharges. They've proven it works in this corridor.
+    </p>
+
+    <p class="body-text">
+      What makes the model fit CW specifically: <strong>we already have the high-commitment product.</strong> A 2.5-hour zipline tour for the guest willing to gear up and go. What we don't have is the version that pulls everyone else — the family with a 4-year-old, the grandparents who don't ride, the spouse who didn't sign up for harnesses. AF is that version.
+    </p>
+
+    <div class="moat-grid">
+      <div class="moat-col">
+        <h3>What AF adds to the model</h3>
+        <ul>
+          <li>Water — swim hole, real cooling in Smokies summer</li>
+          <li>Hot springs — the only ones east of the Mississippi</li>
+          <li>Year-round draw via thermal product</li>
+          <li>Authentic, found-feeling nature</li>
+          <li>Lodging path (Phase 2+)</li>
+        </ul>
+      </div>
+      <div class="moat-col against">
+        <h3>What we're not trying to be</h3>
+        <ul>
+          <li>An in-town walk-up attraction (we're 12 miles out)</li>
+          <li>A million-visitor scale operation</li>
+          <li>An adrenaline park (the zipline already is)</li>
+          <li>A Parkway-visibility play</li>
+          <li>A theme park (no characters, no spectacle)</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footnote">Anakeesta admission: $34.99 adult / $22.99 child / $27.99 senior. Splash Country: $54.95 / $44.95 / $44.95. AF positioning slots between these as a destination requiring a drive — but bundling water, thermal, and an EverZip ride that neither competitor offers.</p>
   </div>
-  <div class="text-side">
-    <div class="section-label">Shoulder Season Anchor</div>
-    <h2 class="syne">The element that keeps us open past summer.</h2>
-    <ul>
-      <li>Cluster of natural-looking hot-spring-style soaking pools</li>
-      <li>Heated, mineral-tinted, built from stacked moss-covered boulder</li>
-      <li>Intimate scale — 4-6 guests each — premium and exclusive feeling</li>
-      <li><strong>Year-round draw:</strong> fall foliage soaks, winter couples retreats, spring warm-up</li>
-      <li>Extends the season and attracts a completely different guest — the couple who would never zipline but will absolutely soak in a hot spring in the mountains</li>
+</section>
+
+<!-- ==================== WAIVER DATA — TODAY ==================== -->
+<section class="spread waiver center">
+  <div class="container col">
+    <div class="section-label">Our Customer · Today</div>
+    <h2>Who's driving out to CW now.</h2>
+
+    <p class="body-text lead">275,682 waivers analyzed across 2018-2024. The picture is consistent — and tells us exactly who we're <strong>not</strong> reaching.</p>
+
+    <div class="two-col" style="margin-top: 2rem;">
+      <div class="col">
+        <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">AGE DISTRIBUTION</h3>
+        <div class="age-chart">
+          <div class="age-row highlight"><span class="age-label">Under 7</span><div class="age-bar"><div class="age-bar-fill" style="width: 0.5%"></div></div><span class="age-pct">0.0%</span></div>
+          <div class="age-row"><span class="age-label">7-12</span><div class="age-bar"><div class="age-bar-fill" style="width: 42%"></div></div><span class="age-pct">8.5%</span></div>
+          <div class="age-row"><span class="age-label">13-17</span><div class="age-bar"><div class="age-bar-fill" style="width: 74%"></div></div><span class="age-pct">14.7%</span></div>
+          <div class="age-row"><span class="age-label">18-25</span><div class="age-bar"><div class="age-bar-fill" style="width: 100%"></div></div><span class="age-pct">19.8%</span></div>
+          <div class="age-row"><span class="age-label">26-35</span><div class="age-bar"><div class="age-bar-fill" style="width: 89%"></div></div><span class="age-pct">17.7%</span></div>
+          <div class="age-row"><span class="age-label">36-45</span><div class="age-bar"><div class="age-bar-fill" style="width: 80%"></div></div><span class="age-pct">15.8%</span></div>
+          <div class="age-row"><span class="age-label">46-55</span><div class="age-bar"><div class="age-bar-fill" style="width: 75%"></div></div><span class="age-pct">14.9%</span></div>
+          <div class="age-row"><span class="age-label">56-65</span><div class="age-bar"><div class="age-bar-fill" style="width: 32%"></div></div><span class="age-pct">6.3%</span></div>
+          <div class="age-row highlight"><span class="age-label">66+</span><div class="age-bar"><div class="age-bar-fill" style="width: 12%"></div></div><span class="age-pct">2.3%</span></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">THE PROFILE</h3>
+        <ul style="list-style: none; margin-top: 1rem; font-size: 1.1rem; line-height: 1.8;">
+          <li><strong class="white-text">76%</strong> of guests are <span class="light-gray">18-55</span></li>
+          <li><strong class="white-text">3.65</strong> average party size</li>
+          <li><strong class="white-text">38.8%</strong> of parties are couples (2)</li>
+          <li><strong class="white-text">11%</strong> of parties have a 60+ member</li>
+          <li><strong class="orange-text">0.1%</strong> have an under-7 kid</li>
+          <li><strong class="orange-text">0.8%</strong> have a 275+ lb member</li>
+        </ul>
+
+        <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em; margin-top: 2rem;">GEOGRAPHY</h3>
+        <p class="body-text" style="font-size: 1rem;">
+          99.2% US · Florida #1 origin (~11%) · Midwest dominant (IL, OH, MI, TX 5-6% each) · 86% one-and-done · Affluent suburb postal codes (Brentwood TN, Sugar Land TX, Carmel IN, Palm Beach FL).
+        </p>
+
+        <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em; margin-top: 2rem;">SEASONALITY</h3>
+        <p class="body-text" style="font-size: 1rem;">
+          July 23.5% · June 17.9% · August 14.0% — summer is 55% of annual volume. October (foliage) is 8.6%. Validates Nick's seasonal curve almost exactly.
+        </p>
+      </div>
+    </div>
+
+    <p class="footnote">Methodology: combined 8 annual waiver CSVs (CWSM Tennessee, 2010-2025). 2025 partial year. Repeat-visitor analysis matched on first+last+postal code (slight under-count). Source data: `Waiver Data/CWSM/`.</p>
+  </div>
+</section>
+
+<!-- ==================== TAM EXPANSION ==================== -->
+<section class="spread tam center">
+  <div class="container col">
+    <div class="section-label">Our Customer · Tomorrow</div>
+    <h2>AF expands the<br>addressable audience 2.5x.</h2>
+
+    <p class="body-text lead">The zipline serves a narrow demo: active 18-55, no young kids, no mobility issues, comfortable with heights. AF includes almost everyone the zipline excludes.</p>
+
+    <div class="tam-blocks">
+      <div class="tam-block">
+        <div class="label">Zipline-Eligible TAM</div>
+        <div class="tam-num">~4M</div>
+        <div class="tam-desc">≈30% of Sevier County's 13M visitors. Active, no young kids, no mobility issues.</div>
+      </div>
+      <div class="tam-arrow">→</div>
+      <div class="tam-block expanded">
+        <div class="label">AF-Eligible TAM</div>
+        <div class="tam-num">~10M</div>
+        <div class="tam-desc">≈75-85%. Includes under-7s, 60+, mobility-limited, fear-of-heights, non-athletic, water-seekers.</div>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top: 2rem;">
+      <div class="col">
+        <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">CAPTURE-RATE MATH</h3>
+        <p class="body-text" style="font-size: 1.05rem;">
+          Current zip = 32K guests on a 4M TAM = <strong>0.8% capture rate</strong>.
+        </p>
+        <p class="body-text" style="font-size: 1.05rem;">
+          At the same capture rate on a 10M expanded TAM: <strong class="orange-text">~80K AF guests/yr.</strong>
+        </p>
+        <p class="body-text" style="font-size: 1.05rem;">
+          Even at half that rate: <strong class="white-text">~40K — Nick's Year 1 plan.</strong>
+        </p>
+      </div>
+      <div class="col">
+        <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">THE VOLUME THESIS</h3>
+        <p class="body-text" style="font-size: 1.05rem;">
+          Nick's proforma projects <strong>36K visitors Year 1, scaling to 77K by Year 4</strong>. The waiver-derived TAM math says that range is defensible — and arguably conservative on the upside.
+        </p>
+        <p class="body-text" style="font-size: 1.05rem;">
+          <strong class="white-text">The volume case rests on AF being a meaningfully more inclusive product than the zipline.</strong> The waiver data is the evidence.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PHASE 1 HEADER ==================== -->
+<section class="spread phase1-header bottom">
+  <img class="phase1-bg" src="output/adventure-forest/hero-vision-aerial.png" alt="Phase 1 aerial vision">
+  <div class="phase1-overlay"></div>
+  <div class="col">
+    <div class="section-label">Phase 1 · Summer 2027</div>
+    <h2>What we build first.</h2>
+    <p class="body-text lead">
+      The full vision is a multi-phase destination over 4-5 years. Phase 1 is the de-risked first move — enough to test the destination thesis without committing to $28M of capex before we know it works.
+    </p>
+    <p class="body-text">
+      Treepods, the Adventure Park, the EverZip Mountaintop replacement, and the Wiegand-tier slide trail are all deferred. They open only if Phase 1 validates the volume case.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== PHASE 1 GRID ==================== -->
+<section class="spread phase1-grid top">
+  <div class="container">
+    <div class="section-label">Phase 1 · The Elements</div>
+    <h2>Eight pieces. One destination.</h2>
+
+    <div class="features">
+      <div class="feature">
+        <img class="feature-img" src="output/adventure-forest/swimming-hole-wide.png" alt="Swim hole">
+        <div class="feature-body">
+          <div class="feature-name">The Swim Hole</div>
+          <div class="feature-desc">The anchor. Naturalistic, designed for thousands of bathers, looks found but filters conventionally. The superlative the trip is built around.</div>
+        </div>
+      </div>
+      <div class="feature">
+        <img class="feature-img" src="output/adventure-forest/hot-springs-tubs.png" alt="Hot springs">
+        <div class="feature-body">
+          <div class="feature-name">Hot Springs (4-5 pools)</div>
+          <div class="feature-desc">Tennessee's only commercial hot springs. The year-round draw. Timed 2-hour sessions, premium add-on, the differentiator no in-town attraction can match.</div>
+        </div>
+      </div>
+      <div class="feature">
+        <img class="feature-img" src="output/adventure-forest/skybridge-canopy-walk.png" alt="Canopy walk">
+        <div class="feature-body">
+          <div class="feature-name">Adventure Forest Hike</div>
+          <div class="feature-desc">Loop trail with ~450 ft of canopy bridges (in-house build). Easy enough for grandparents, photo-bait throughout, the connective tissue between elements.</div>
+        </div>
+      </div>
+      <div class="feature">
+        <img class="feature-img" src="output/adventure-forest/everzip-ride.png" alt="EverZip">
+        <div class="feature-body">
+          <div class="feature-name">EverZip Final Line</div>
+          <div class="feature-desc">Standalone ride included in AF admission — also caps off the existing Mountaintop tour. Turns the zipline business into part of AF, not a separate product.</div>
+        </div>
+      </div>
+      <div class="feature">
+        <img class="feature-img" src="output/adventure-forest/treenet-play.png" alt="Netted play">
+        <div class="feature-body">
+          <div class="feature-name">Netted Play</div>
+          <div class="feature-desc">Treenet Willy spec (based on our Hawaii build). 4 large nets + 2 small. The kid magnet that lets parents stop and rest while kids burn energy.</div>
+        </div>
+      </div>
+      <div class="feature">
+        <img class="feature-img" src="output/adventure-forest/slides-climbing.png" alt="Slides">
+        <div class="feature-body">
+          <div class="feature-name">Mini Slide Park</div>
+          <div class="feature-desc">Six commercial slides at 12-15 feet. Family-friendly scale. Designed to be Wiegand-upgradeable for monster spiral slides in later phases.</div>
+        </div>
+      </div>
+      <div class="feature">
+        <img class="feature-img" src="output/adventure-forest/amenities-bathhouse.png" alt="Bathhouse">
+        <div class="feature-body">
+          <div class="feature-name">Bathhouse</div>
+          <div class="feature-desc">Changing, showers, lockers, restrooms — TN regulatory requirement for public swim. Designed as a place to dwell, not just transit.</div>
+        </div>
+      </div>
+      <div class="feature">
+        <img class="feature-img" src="output/adventure-forest/amenities-food.png" alt="Food">
+        <div class="feature-body">
+          <div class="feature-name">Two F&amp;B Nodes</div>
+          <div class="feature-desc">Not one generic pavilion. Two distinct venues — coffee/breakfast for early arrivals, smokehouse/bar overlooking the swim hole for the dwell crowd.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="deferred-note">
+      <div class="label">Deferred to Phase 2+</div>
+      <p>Adventure Park (non-belayed). Treepods (15→50 over 4 years). EverZip MT Course replacement. Wiegand-tier slide trail. Wellness/spa. Full hot springs buildout to 8-10 pools.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== THE INVESTMENT ==================== -->
+<section class="spread invest center">
+  <div class="container col">
+    <div class="section-label">The Investment</div>
+    <h2>Phase 1 · Approximately $10.1M</h2>
+    <p class="body-text lead">Tighter than the full vision's $28M because Phase 1 is the validation. Two line items are still placeholders pending vendor quotes — flagged below.</p>
+
+    <table class="invest-table">
+      <thead>
+        <tr><th>Element</th><th style="text-align: right">Cost</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="line">Design + permitting</td><td class="num">$400K</td><td class="dim-text">Nick's proforma</td></tr>
+        <tr><td class="line">AF site prep + utilities</td><td class="num">$1.6M</td><td class="dim-text">Nick's proforma</td></tr>
+        <tr><td class="line">Adventure hike trail + wayfinding</td><td class="num">$300K</td><td class="dim-text">Estimate</td></tr>
+        <tr><td class="line">Canopy bridges (450ft, in-house) <span class="grounded-tag">Solid</span></td><td class="num">$175K</td><td class="dim-text">CW spec</td></tr>
+        <tr><td class="line">Swim hole <span class="placeholder-tag">Placeholder</span></td><td class="num">$2.2M</td><td class="dim-text">Lucas / Sequoyah quotes pending</td></tr>
+        <tr><td class="line">Hot springs (4-5 pools) <span class="placeholder-tag">Placeholder</span></td><td class="num">$1.0M</td><td class="dim-text">Reid estimate</td></tr>
+        <tr><td class="line">Bathhouse + 2 F&amp;B nodes</td><td class="num">$1.15M</td><td class="dim-text">Estimate</td></tr>
+        <tr><td class="line">Netted play (Treenet Willy) <span class="grounded-tag">Solid</span></td><td class="num">$85K</td><td class="dim-text">Hawaii build basis</td></tr>
+        <tr><td class="line">6 slides @ $15-20K <span class="grounded-tag">Solid</span></td><td class="num">$105K</td><td class="dim-text">CW spec</td></tr>
+        <tr><td class="line">EverZip new final line</td><td class="num">$2.0M</td><td class="dim-text">Nick's proforma</td></tr>
+        <tr><td class="line">Landscape + entrance treatment</td><td class="num">$200K</td><td class="dim-text">Estimate</td></tr>
+        <tr><td class="line">Contingency (~10%)</td><td class="num">$922K</td><td class="dim-text">Standard</td></tr>
+        <tr class="total"><td class="line"><strong>Phase 1 Total</strong></td><td class="num">$10.1M</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <p class="footnote">Swim hole and hot springs costs are the two largest sources of uncertainty. Realistic range based on vendor responses: $10-13M. Iron Mountain Hot Springs comp ($14M / 16 pools) suggests our hot springs estimate may be light by 1-2M if we want comparable infrastructure.</p>
+  </div>
+</section>
+
+<!-- ==================== PRICING ==================== -->
+<section class="spread pricing center">
+  <div class="container col">
+    <div class="section-label">Pricing · A Strategic Choice</div>
+    <h2>Volume thesis vs. premium thesis.</h2>
+    <p class="body-text lead">These two models produce roughly the same Year 4 revenue — at very different operating profiles. <strong>This is the team's debate, not a recommendation.</strong></p>
+
+    <div class="pricing-cols">
+      <div class="price-card">
+        <div class="thesis-name">Volume Thesis</div>
+        <h3>Win the family decision.</h3>
+        <div class="price-row"><span class="label">Adult (10-61)</span><span class="val">$44.95</span></div>
+        <div class="price-row"><span class="label">Child (4-9)</span><span class="val">$29.95</span></div>
+        <div class="price-row"><span class="label">Senior (62+)</span><span class="val">$39.95</span></div>
+        <div class="price-row"><span class="label">Hot springs add</span><span class="val">+$25</span></div>
+        <div class="price-row"><span class="label">Y1 visitor target</span><span class="val">75-100K</span></div>
+        <div class="price-row"><span class="label">Per-cap (mature)</span><span class="val">~$54</span></div>
+        <p class="argument">Splash Country is the real comp for the family decision. AF undercuts it on family base, makes premium back through adult hot-springs upsell. Volume compounds (brand, social, lodging halo).</p>
+      </div>
+
+      <div class="price-card premium">
+        <div class="thesis-name">Premium Thesis (Nick)</div>
+        <h3>Position as destination.</h3>
+        <div class="price-row"><span class="label">Adult / Child / Senior</span><span class="val">$59.95 flat</span></div>
+        <div class="price-row"><span class="label">Hot springs add</span><span class="val">+$25</span></div>
+        <div class="price-row"><span class="label">Y1 visitor target</span><span class="val">36-50K</span></div>
+        <div class="price-row"><span class="label">Per-cap (mature)</span><span class="val">~$78</span></div>
+        <div class="price-row"><span class="label">Operating profile</span><span class="val">Lighter throughput</span></div>
+        <div class="price-row"><span class="label">F&amp;B per cap</span><span class="val">$7 → $18</span></div>
+        <p class="argument">Premium positioning, fewer SKUs, easier ops, higher per-cap. Bet is that AF's product (water + hot springs) is strong enough to justify a premium without sacrificing volume.</p>
+      </div>
+    </div>
+
+    <div class="price-benchmark">
+      <div class="label">Market Benchmarks</div>
+      <div class="row"><span>Anakeesta</span><span>$34.99 adult / $22.99 child / $27.99 senior</span></div>
+      <div class="row"><span>Splash Country (Dollywood)</span><span>$54.95 adult / $44.95 child &amp; senior</span></div>
+      <div class="row"><span>Wilderness at the Smokies (waterpark resort)</span><span>Bundled with lodging</span></div>
+    </div>
+
+    <p class="footnote">Family math: 4-person family (2 adults + 2 kids 7-12) at AF Volume = $149.80. At Premium = $239.80. At Splash Country = $199.80. At Anakeesta = $115.96. Adult hot-springs add-on ($50 for a couple) closes the per-family gap between Volume and Splash Country to exactly $0 — while extracting premium from adults without pricing families out.</p>
+  </div>
+</section>
+
+<!-- ==================== REVENUE PROJECTIONS ==================== -->
+<section class="spread revenue center">
+  <div class="container col">
+    <div class="section-label">Revenue · Five-Year View</div>
+    <h2>Per Nick's proforma.</h2>
+    <p class="body-text lead">Phase 1 (AF) opens 2027 as a partial year. Treepods open 2028 contingent on Phase 1 results. Full destination is steady-state by 2031.</p>
+
+    <table class="rev-table">
+      <thead>
+        <tr><th>Line</th><th>2027</th><th>2028</th><th>2029</th><th>2030</th><th>2031</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="line">Adventure Forest revenue</td><td class="num">$2.46M</td><td class="num">$4.34M</td><td class="num">$5.16M</td><td class="num">$6.04M</td><td class="num">$6.04M</td></tr>
+        <tr><td class="line">Treepods (15→50 units)</td><td class="num">—</td><td class="num">$1.23M</td><td class="num">$2.85M</td><td class="num">$4.50M</td><td class="num">$6.02M</td></tr>
+        <tr><td class="line">Zipline (incl. EverZip lift)</td><td class="num">$3.39M</td><td class="num">$3.99M</td><td class="num">$5.38M</td><td class="num">$6.02M</td><td class="num">$6.40M</td></tr>
+        <tr class="bold"><td class="line"><strong>Total Expansion Revenue</strong></td><td class="num">$5.85M</td><td class="num">$9.56M</td><td class="num">$13.38M</td><td class="num">$16.55M</td><td class="num">$18.46M</td></tr>
+      </tbody>
+    </table>
+
+    <div class="two-col" style="margin-top: 3rem;">
+      <div class="col">
+        <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">FULL-VISION RETURNS</h3>
+        <p class="body-text" style="font-size: 1.05rem;">
+          Total capex (5-year): <strong>$25.5M</strong><br>
+          5-yr cumulative contribution: <strong>$37.2M</strong><br>
+          Simple 5-year ROI: <strong>1.46x</strong><br>
+          Payback period: <strong>~3.9 years</strong><br>
+          NPV @ 10% WACC: <strong class="green-text">+$4.97M</strong>
+        </p>
+      </div>
+      <div class="col">
+        <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">PHASE 1 STANDALONE</h3>
+        <p class="body-text" style="font-size: 1.05rem;">
+          If Phase 1 stops at Year 1: AF revenue $2.5M, zipline lift $3.4M, total $5.9M from a $10.1M investment. Standalone payback ~3-4 years at the AF contribution margin. Even without Phase 2, this is a profitable bet — just slower compounding.
+        </p>
+      </div>
+    </div>
+
+    <p class="footnote">Source: Nick Lewis Smokies Expansion Proforma v4 (May 2026). Contribution margins: AF 60%, Treepods 70%, Zipline 50%. Cost of capital 10%.</p>
+  </div>
+</section>
+
+<!-- ==================== PHASE 2 TRIGGER ==================== -->
+<section class="spread trigger center">
+  <div class="container col">
+    <div class="section-label">The Trigger</div>
+    <h2>What tells us to go bigger.</h2>
+    <p class="body-text lead">Phase 1 is the test. Year 1 Summer (Jun-Aug 2027) AF visitor count is the binary signal that drives the treepod commitment for 2028.</p>
+
+    <div class="trigger-grid">
+      <div class="trigger-card">
+        <div class="threshold">35K+</div>
+        <div class="verdict">GO</div>
+        <p>Summer 2027 visitors hit 35K. The 70K+ annual run-rate validates the volume thesis. Commit to full 15-pod Phase 2 treepod buildout for 2028.</p>
+      </div>
+      <div class="trigger-card conditional">
+        <div class="threshold">20-35K</div>
+        <div class="verdict">CONDITIONAL</div>
+        <p>Volume is there but soft. Build a 5-pod pilot in 2028 to test the lodging-conversion thesis. Defer full buildout to 2029.</p>
+      </div>
+      <div class="trigger-card hold">
+        <div class="threshold">&lt;20K</div>
+        <div class="verdict">HOLD</div>
+        <p>Volume is below the floor. Debrief — marketing, product, pricing, location. No treepod capex until we understand the gap.</p>
+      </div>
+    </div>
+
+    <p class="body-text" style="margin-top: 2.5rem;">
+      <strong>Why these thresholds:</strong> Nick's plan = 175 guests/day × 92 summer days ≈ 16K just for summer (out of 36K annual). 35K summer = ~70K annual run-rate, which is the volume thesis. 20K summer = the volume floor where the premium thesis still works.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== THE FULL VISION ==================== -->
+<section class="spread vision center">
+  <img class="vision-bg" src="output/treepod-vision.png" alt="Treepod vision">
+  <div class="vision-overlay"></div>
+  <div class="container col">
+    <div class="section-label">Where This Leads</div>
+    <h2>If it works,<br>here's the full vision.</h2>
+
+    <p class="body-text lead">Five years from now, CW Smokies is the only multi-night nature destination in the Smokies corridor. Steady-state revenue $18M, EBITDA in the $9-12M range depending on pricing thesis.</p>
+
+    <ul class="vision-phases">
+      <li><span class="year">2027</span><span class="what">Phase 1 opens · AF + swim hole + hot springs + EverZip</span><span class="amt">~$10.1M</span></li>
+      <li><span class="year">2028</span><span class="what">Treepods (15) + Adventure Park + EverZip MT replacement</span><span class="amt">~$8.2M</span></li>
+      <li><span class="year">2029</span><span class="what">+15 treepods (30 total) + wellness/spa + expand hot springs</span><span class="amt">~$2.4M</span></li>
+      <li><span class="year">2030</span><span class="what">+10 treepods (40 total) + Wiegand slide trail</span><span class="amt">~$2.5M</span></li>
+      <li><span class="year">2031</span><span class="what">+10 treepods (50 total) + full hot springs · steady state</span><span class="amt">—</span></li>
     </ul>
+
+    <p class="footnote" style="margin-top: 2rem;">Treepod renders are conceptual. Final design will be a CW Design Treepod — Reid + Nick's product, vetted by Turley prototypes (~6 weeks from April 9). Actual build cost may differ from Nick's $250K/unit assumption.</p>
   </div>
 </section>
 
-<!-- ================================ -->
-<!-- SPREAD 7: THE PLAY LAYER         -->
-<!-- ================================ -->
-<section class="spread image-text">
-  <div class="image-side">
-    <img src="output/canopy-walk/canopy-walk-family.png" alt="Canopy walk concept">
-  </div>
-  <div class="text-side">
-    <div class="section-label">Along the Loop</div>
-    <h2 class="syne">Small investments. Big play value. Day one.</h2>
-    <ul>
-      <li>Three skybridges through the upper canopy</li>
-      <li>Multi-level tree nets between the trunks</li>
-      <li>Giant bounce-net jump target</li>
-      <li>Stainless tube slides down a forested hillside with climbing access</li>
-      <li>Kid-scale playground zipline</li>
-      <li>Built with timber, rope, and stainless — low capex, high engagement</li>
-      <li><strong>These elements ARE the loop — not add-ons</strong></li>
-    </ul>
-  </div>
-</section>
+<!-- ==================== CAPITAL FRAMING ==================== -->
+<section class="spread invest center">
+  <div class="container col">
+    <div class="section-label">Capital · The Honest Part</div>
+    <h2>Smokies can't carry this alone.</h2>
 
-<!-- ================================ -->
-<!-- SPREAD 8: TREEPOD LODGING        -->
-<!-- ================================ -->
-<section class="spread lodging">
-  <div class="lodging-hero">
-    <img src="output/treepods-clusters/cluster-forest-aerial.png" alt="Treepod cluster in forest">
-    <div class="lodging-hero-overlay">
-      <div class="section-label" style="color: var(--green)">The Multiplier</div>
-      <h2 class="syne">The reason they stay overnight.</h2>
+    <p class="body-text lead">Phase 1's $10.1M is roughly 2-3x the Smokies business's annual EBITDA. Full vision's $25.5M is 5-6x. Some combination of bank debt + cash flow + outside equity is the reality — not solved in this document.</p>
+
+    <div class="two-col" style="margin-top: 2rem;">
+      <div class="col">
+        <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">PATH A · BANK</h3>
+        <p class="body-text" style="font-size: 1.05rem;">
+          Construction-to-permanent loan. 70-75% LTV. CW puts up $6-8M equity (cash + land value). Rate ~7.5-8.5%. DSCR clears 1.25x minimum even in Year 1; comfortable 4.5x at steady state. <strong>Standard path. Local Smokies-corridor banks know tourism.</strong>
+        </p>
+      </div>
+      <div class="col">
+        <h3 class="orange-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">PATH B · EQUITY PARTNER</h3>
+        <p class="body-text" style="font-size: 1.05rem;">
+          Investor capital for 25-50% equity. 15-25% IRR expectation. Possible multi-property structure (Smokies + other CW assets) for portfolio diversification. <strong>More expensive capital but shares downside risk; complicates governance permanently.</strong>
+        </p>
+      </div>
     </div>
-  </div>
-  <div class="lodging-grid">
-    <div class="lodging-grid-item">
-      <img src="output/treepods-clusters2/cluster-cabin-evening.png" alt="Cabin pods at evening">
-    </div>
-    <div class="lodging-grid-item text-cell">
-      <div class="section-label" style="margin-bottom: 0.8rem">Treepod Lodging</div>
-      <p>Guests wake up IN the experience — step out of their pod onto the trail, walk to the swimming hole, soak in the hot springs before breakfast. The lodging isn't adjacent to the property. It's part of it.</p>
-      <p style="margin-top: 1rem;"><strong style="color: var(--orange)">50 pods. $350–550/night. All-inclusive.</strong></p>
-      <div class="comp-line green-text">Blackberry Mountain for normal people</div>
-      <table class="comp-table">
-        <tr><td></td><td style="color:#555">Blackberry Mtn</td><td>CW Smokies</td></tr>
-        <tr><td>Nightly rate</td><td>$1,045+</td><td>$350–550</td></tr>
-        <tr><td>Water</td><td>Pond + pool</td><td>Swim hole + springs</td></tr>
-        <tr><td>Lodging</td><td>Conventional cottages</td><td>Steel treepods</td></tr>
-        <tr><td>Adventure</td><td>Supplementary</td><td>Core product</td></tr>
-      </table>
-    </div>
-    <div class="lodging-grid-item">
-      <img src="output/treepods-clusters2/cluster-cabin-interior-view.png" alt="Treepod interior view">
-    </div>
+
+    <p class="body-text" style="margin-top: 2rem;">
+      <strong>Default recommendation:</strong> bank path, given the strong DSCR coverage and CW's operating history. Path B opens up if CW can't put up the equity, or if there's strategic value in a multi-asset partner. <em>This is a Kolby + lender conversation, not a brainstorm conclusion.</em>
+    </p>
   </div>
 </section>
 
-<!-- ================================ -->
-<!-- SPREAD 9: TICKET STRUCTURE       -->
-<!-- ================================ -->
-<section class="spread tickets">
-  <div class="section-label">The Tickets</div>
-  <h2 class="syne">How guests pay.</h2>
+<!-- ==================== DECISIONS NEEDED ==================== -->
+<section class="spread decisions center">
+  <div class="container col">
+    <div class="section-label">Decisions Needed</div>
+    <h2>What the team has to decide.</h2>
 
-  <div class="ticket-grid">
-    <div class="ticket-card">
-      <div class="ticket-price">$60</div>
-      <div class="ticket-name">Adventure Forest</div>
-      <div class="ticket-desc">Trail loop + play elements + swimming hole + EverZip ride. Bundled. The core day ticket.</div>
-    </div>
-    <div class="ticket-card">
-      <div class="ticket-price">$40</div>
-      <div class="ticket-name">Hot Springs</div>
-      <div class="ticket-desc">Standalone ticket. Timed 2-hour sessions, limited capacity. +$25 as an AF add-on.</div>
-    </div>
-    <div class="ticket-card">
-      <div class="ticket-price">+$20</div>
-      <div class="ticket-name">Adventure Park</div>
-      <div class="ticket-desc">Add-on to AF ticket. Relocated ropes course — structure already owned.</div>
-    </div>
-    <div class="ticket-card">
-      <div class="ticket-price">+$40</div>
-      <div class="ticket-name">Zip + AF Combo</div>
-      <div class="ticket-desc">Add AF to a zipline ticket. Turns a 2.5-hour visit into a full day.</div>
-    </div>
-    <div class="ticket-card highlight">
-      <div class="ticket-price">$350–550</div>
-      <div class="ticket-name">Treepod Lodging</div>
-      <div class="ticket-desc">Per night, all-inclusive. Adventure Forest + hot springs + food included. Blackberry Mountain model.</div>
-    </div>
-  </div>
+    <ol>
+      <li>
+        <strong>Phase 1 commit · Yes or no</strong>
+        Commit to building Phase 1 (~$10.1M) for Summer 2027 open, knowing swim hole + hot springs costs are still being sourced. If yes — design partner selection + lender conversation start this summer.
+      </li>
+      <li>
+        <strong>Pricing thesis · Volume or premium</strong>
+        Volume model ($44.95 / $29.95 / $39.95) or premium model ($59.95 flat). Both pencil; they have different operating profiles and different brand positioning consequences.
+      </li>
+      <li>
+        <strong>Phase 2 trigger threshold</strong>
+        Is 35K Summer 2027 visitors the right "go" threshold for treepod commitment? If the team thinks it should be higher or lower, decide before opening.
+      </li>
+      <li>
+        <strong>Capital structure preference</strong>
+        Bank-heavy or equity-heavy. Affects timing, control, and how aggressive we can be on Phase 2.
+      </li>
+      <li>
+        <strong>Brand name + identity</strong>
+        "Adventure Forest" is descriptive. The destination deserves something evocative tied to place. CW design team handles in-house — but pick the working name before any external marketing.
+      </li>
+    </ol>
 
-  <p class="ticket-note">Hot springs is the only viable winter day-visitor ticket. Lodging is the seasonal stabilizer.</p>
-</section>
-
-<!-- ================================ -->
-<!-- SPREAD 10: THE NUMBERS           -->
-<!-- ================================ -->
-<section class="spread numbers">
-  <div class="section-label">The Math</div>
-  <h2 class="syne">The numbers work.</h2>
-
-  <div class="numbers-grid">
-    <div class="number-card">
-      <div class="value">$12.5M</div>
-      <div class="desc">Steady-state annual revenue</div>
-    </div>
-    <div class="number-card">
-      <div class="value">$9.6M</div>
-      <div class="desc">Incremental EBITDA</div>
-    </div>
-    <div class="number-card">
-      <div class="value">77%</div>
-      <div class="desc">Incremental margin</div>
-    </div>
-    <div class="number-card">
-      <div class="value">Y4</div>
-      <div class="desc">Full payback</div>
-    </div>
-  </div>
-
-  <div class="numbers-grid" style="margin-bottom: 3rem;">
-    <div class="number-card">
-      <div class="value" style="font-size: clamp(1.5rem, 2.5vw, 2.5rem);">70K</div>
-      <div class="desc">AF day visitors / year (closed Sundays)</div>
-    </div>
-    <div class="number-card">
-      <div class="value" style="font-size: clamp(1.5rem, 2.5vw, 2.5rem);">$60</div>
-      <div class="desc">AF ticket (incl. EverZip ride)</div>
-    </div>
-    <div class="number-card">
-      <div class="value" style="font-size: clamp(1.5rem, 2.5vw, 2.5rem);">50</div>
-      <div class="desc">Treepods at $425 avg ADR</div>
-    </div>
-    <div class="number-card">
-      <div class="value" style="font-size: clamp(1.5rem, 2.5vw, 2.5rem);">43K</div>
-      <div class="desc">Zip guests w/ EverZip (up from 23K)</div>
-    </div>
-  </div>
-
-  <p class="numbers-footnote">Margins are high because they're incremental — CW's existing overhead is already covered by the zipline business. Adventure Forest layers on top.</p>
-</section>
-
-<!-- ================================ -->
-<!-- SPREAD 10b: REVENUE BREAKDOWN    -->
-<!-- ================================ -->
-<section class="spread breakdown">
-  <div class="section-label">Revenue Detail</div>
-  <h2 class="syne">Where the $12.5M comes from.</h2>
-
-  <div class="breakdown-columns">
-    <div class="breakdown-col">
-      <h3 class="syne" style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--green);">Revenue Lines</h3>
-      <table class="breakdown-table">
-        <tr><td>AF tickets (70K × $60)</td><td>$4.2M</td></tr>
-        <tr><td>Hot springs standalone (7K × $40)</td><td>$280K</td></tr>
-        <tr><td>Hot springs add-on (15K × $25)</td><td>$375K</td></tr>
-        <tr><td>Adventure Park add-on (25K × $20)</td><td>$490K</td></tr>
-        <tr class="subtotal"><td>Day visitor ticketing</td><td>$5.3M</td></tr>
-        <tr><td>Zip combo uplift (22K × $40 + F&B)</td><td>$960K</td></tr>
-        <tr><td>F&B + retail</td><td>$560K</td></tr>
-        <tr><td>Lodging — 50 pods, $425 ADR, 65% occ</td><td>$5.1M</td></tr>
-        <tr><td>Wellness + season passes</td><td>$625K</td></tr>
-        <tr class="total"><td>Total Revenue</td><td>$12.5M</td></tr>
-      </table>
-    </div>
-
-    <div class="breakdown-col">
-      <h3 class="syne" style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--green);">Operating Costs</h3>
-      <table class="breakdown-table">
-        <tr><td>Seasonal labor (~37 peak / ~16 winter)</td><td>$1.7M</td></tr>
-        <tr><td>Pool + springs heating, chemicals, utilities</td><td>$200K</td></tr>
-        <tr><td>Maintenance + consumables</td><td>$300K</td></tr>
-        <tr><td>Insurance adder</td><td>$125K</td></tr>
-        <tr><td>Marketing</td><td>$350K</td></tr>
-        <tr class="total"><td>Total Opex</td><td>$2.7M</td></tr>
-      </table>
-
-      <h3 class="syne" style="font-size: 1.1rem; margin: 2.5rem 0 1.5rem; color: var(--orange);">If We're Wrong</h3>
-      <table class="breakdown-table">
-        <tr><td colspan="2" style="color: #666; font-style: italic; border-bottom: none;">44K AF visitors (Y1 summer only), $375 ADR, 50% occ</td></tr>
-        <tr><td>Downside revenue</td><td>$8.5M</td></tr>
-        <tr><td>Downside EBITDA</td><td>$5.8M</td></tr>
-        <tr class="subtotal"><td>Downside payback</td><td>Y5-Y6</td></tr>
-      </table>
+    <div class="open-deps">
+      <div class="label">Open Dependencies</div>
+      <p><strong>Vendor quotes pending:</strong> Lucas Lagoons + Sequoyah Pools (swim hole) · Iron Mountain / Counsilman-Hunsaker (hot springs) · 4-6 week turnaround</p>
+      <p><strong>External data:</strong> TN Department of Tourist Development 2024 Visitor Profile (request sent 5/14)</p>
+      <p><strong>Internal validation:</strong> Current-guest survey at CW Smokies on AF willingness-to-pay (proposed)</p>
+      <p><strong>Property:</strong> Neighbor parcel acquisition before plans go public</p>
+      <p><strong>Treepod costs:</strong> Turley prototype actuals (~6 weeks from April 9)</p>
     </div>
   </div>
 </section>
 
-<!-- ================================ -->
-<!-- SPREAD 11: PHASING               -->
-<!-- ================================ -->
-<section class="spread phasing">
-  <div class="section-label">The Build</div>
-  <h2 class="syne">Three ways to build it.</h2>
-
-  <div class="phasing-options">
-    <div class="phasing-option">
-      <div class="option-header">
-        <h3 class="syne">Year 1 — Summer 2027</h3>
-        <p class="option-strategy">Open with the full experience at smaller scale.</p>
-      </div>
-      <div class="option-body">
-        <div class="option-phase">AF loop + swimming hole + hot springs (3-4 pools) + all play elements + EverZip final line + 15 treepods + bathhouse + food pavilion</div>
-        <div class="option-phase" style="color: #555; font-style: italic;">44K AF guests (peak season only). $3M AF rev + $1.6M lodging + $3.4M zip.</div>
-      </div>
-      <div class="option-footer">
-        <span class="option-capex">AF revenue: $5.2M (partial year)</span>
-      </div>
-    </div>
-
-    <div class="phasing-option">
-      <div class="option-header">
-        <h3 class="syne">Year 2-3 — 2028-2029</h3>
-        <p class="option-strategy">Expand what's working. Replace MT course with EverZip.</p>
-      </div>
-      <div class="option-body">
-        <div class="option-phase"><span class="option-yr">Y2</span> First full year. Adventure Park (non-belayed, nets). Expand to 30 treepods. Expand hot springs.</div>
-        <div class="option-phase"><span class="option-yr">Y3</span> Replace MT zipline course with full EverZip. Scale to 40 treepods. Add wellness.</div>
-        <div class="option-phase" style="color: #555; font-style: italic;">62K→70K AF guests. Zip grows to 43K with EverZip. Lodging scales to $3.7M.</div>
-      </div>
-      <div class="option-footer">
-        <span class="option-capex">Y3 combined revenue: ~$14M (AF + zip + lodging)</span>
-      </div>
-    </div>
-
-    <div class="phasing-option">
-      <div class="option-header">
-        <h3 class="syne">Year 4-6 — 2030-2032</h3>
-        <p class="option-strategy">Scale treepods. Reach steady state.</p>
-      </div>
-      <div class="option-body">
-        <div class="option-phase"><span class="option-yr">Y4</span> 50 treepods. $5.3M lodging. 47K zip guests.</div>
-        <div class="option-phase"><span class="option-yr">Y5</span> 50 treepods at steady state. $6.6M lodging.</div>
-        <div class="option-phase"><span class="option-yr">Y6</span> Scale to 60 treepods if demand supports. $7.9M lodging.</div>
-      </div>
-      <div class="option-footer">
-        <span class="option-capex">Y5 lodging alone: $6.6M at 85% occ</span>
-        <span class="option-note">Full property revenue at scale: $18-20M (AF + zip + lodging + wellness)</span>
-      </div>
-    </div>
-  </div>
+<!-- ==================== CLOSING ==================== -->
+<section class="closing">
+  <h2>One bet. Phased.</h2>
+  <p>Phase 1 is ~$10M to find out if the destination thesis works.</p>
+  <p>If it works, Phase 2 is the rest of the vision.</p>
+  <p>If it doesn't, we've learned for $10M, not $28M.</p>
+  <p style="margin-top: 2rem;"><strong class="green-text">That's the bet.</strong></p>
+  <div class="meta">CLIMB Works · Adventure Forest · Phase 1 Proposal · May 2026</div>
 </section>
 
-<!-- ================================ -->
-<!-- SPREAD 11: FALL FOLIAGE BREAK    -->
-<!-- ================================ -->
-<section class="spread" style="position: relative;">
-  <img src="output/treepods-clusters2/cluster-cabin-fall.png" alt="Treepods in fall foliage" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
-  <div style="position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);"></div>
-  <div style="position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; padding: 5vw; max-width: 800px;">
-    <h2 class="syne" style="font-size: clamp(1.8rem, 3vw, 3rem); margin-bottom: 1rem;">October alone is worth $1.9M.</h2>
-    <p class="body-text" style="max-width: 700px;">Peak foliage. 90% pod occupancy. $550 ADR. The best month in the Smokies becomes the best month on the books.</p>
-  </div>
-</section>
-
-<!-- ================================ -->
-<!-- SPREAD 12: CLOSE                 -->
-<!-- ================================ -->
-<section class="spread close">
-  <div class="section-label">Where We're At</div>
-  <h2 class="syne">We're not adding an attraction.<br>We're changing what Smokies is.</h2>
-  <div class="close-bullets">
-    <p><strong style="color: var(--white)">Today: </strong>a 2.5-hour zipline stop for guests willing to zipline.</p>
-    <p><strong style="color: var(--white)">After Adventure Forest: </strong>a half-day destination for everyone — families, couples, relaxers, kids, locals, plus every zipline guest who now stays and spends more.</p>
-    <p style="margin-top: 1rem;">The swim hole is the Instagram engine.</p>
-    <p>The hot springs extend the season.</p>
-    <p>The play layer compounds dwell time.</p>
-    <p>The adventure park is free structure we already own.</p>
-    <p>The treepods turn a $60 day ticket into a $500 overnight.</p>
-    <p>EverZip is in the AF ticket from day one — justifies the $60 and grows zip guests to 43K.</p>
-  </div>
-  <p class="cover-meta">CLIMB Works Smoky Mountains &nbsp;/&nbsp; Adventure Forest Vision &nbsp;/&nbsp; April 2026</p>
-</section>
-
-</div><!-- end content-locked -->
+</div>
 
 <script>
-(function(){
-  var g=document.getElementById('gate'),
-      i=document.getElementById('gate-input'),
-      e=document.getElementById('gate-error'),
-      c=document.getElementById('content');
-  if(sessionStorage.getItem('af-unlocked')==='1'){
-    g.classList.add('hidden');
-    c.classList.add('unlocked');
-  }
-  i.addEventListener('keydown',function(ev){
-    if(ev.key==='Enter'){
-      if(i.value==='mashbutton'){
-        sessionStorage.setItem('af-unlocked','1');
-        g.classList.add('hidden');
-        c.classList.add('unlocked');
+  const gate = document.getElementById('gate');
+  const input = document.getElementById('gate-input');
+  const content = document.getElementById('content');
+  const error = document.getElementById('gate-error');
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      if (input.value === 'mashbutton') {
+        gate.style.display = 'none';
+        content.classList.add('unlocked');
+        document.body.style.overflow = 'auto';
       } else {
-        e.textContent='Wrong password';
-        i.value='';
+        error.textContent = 'Wrong password';
+        input.value = '';
       }
     }
   });
-})();
 </script>
-
 </body>
 </html>
