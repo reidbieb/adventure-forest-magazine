@@ -79,15 +79,15 @@
 
   .body-text {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-size: 1.3rem;
-    line-height: 1.6;
+    font-size: 1.5rem;
+    line-height: 1.55;
     color: var(--light-gray);
-    max-width: 780px;
-    margin-bottom: 1rem;
+    max-width: 820px;
+    margin-bottom: 1.1rem;
   }
 
   .body-text strong { color: var(--white); }
-  .body-text.lead { font-size: 1.55rem; max-width: 900px; }
+  .body-text.lead { font-size: 1.8rem; max-width: 940px; line-height: 1.5; }
 
   .stat-number {
     font-family: 'Syne', sans-serif;
@@ -101,11 +101,12 @@
   .dim-text { color: var(--text-gray); font-size: 0.95rem; }
 
   .footnote {
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: var(--text-gray);
     font-style: italic;
     margin-top: 2rem;
-    max-width: 580px;
+    max-width: 720px;
+    line-height: 1.55;
   }
 
   /* Reusable containers */
@@ -193,7 +194,8 @@
   }
   .editor .body-text {
     max-width: none;
-    font-size: 1.4rem;
+    font-size: 1.55rem;
+    line-height: 1.55;
     margin-bottom: 1.5rem;
   }
   .signature {
@@ -243,10 +245,10 @@
     color: var(--green);
   }
   .stat .note {
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: var(--text-gray);
     margin-top: 0.5rem;
-    line-height: 1.4;
+    line-height: 1.45;
   }
 
   /* DRIVE BAR */
@@ -448,9 +450,9 @@
     margin-bottom: 0.5rem;
   }
   .feature-desc {
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     color: var(--light-gray);
-    line-height: 1.5;
+    line-height: 1.55;
   }
   .deferred-note {
     margin-top: 2rem;
@@ -481,10 +483,10 @@
     margin-top: 1.5rem;
   }
   .invest-table th, .invest-table td {
-    padding: 0.85rem 0.5rem;
+    padding: 0.9rem 0.5rem;
     text-align: left;
     border-bottom: 1px solid var(--mid-gray);
-    font-size: 0.95rem;
+    font-size: 1.1rem;
   }
   .invest-table th {
     font-family: 'Syne', sans-serif;
@@ -564,9 +566,9 @@
   .price-row {
     display: flex;
     justify-content: space-between;
-    padding: 0.6rem 0;
+    padding: 0.7rem 0;
     border-bottom: 1px dashed var(--dim-gray);
-    font-size: 1rem;
+    font-size: 1.15rem;
   }
   .price-row:last-of-type { border-bottom: none; }
   .price-row .label { color: var(--light-gray); }
@@ -581,15 +583,15 @@
     border-top: 1px solid var(--dim-gray);
     font-style: italic;
     color: var(--light-gray);
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 1.15rem;
+    line-height: 1.55;
   }
   .price-benchmark {
     margin-top: 2rem;
     padding: 1.5rem;
     background: rgba(0,0,0,0.4);
     border-radius: 4px;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
   }
   .price-benchmark .label {
     font-family: 'Syne', sans-serif;
@@ -608,13 +610,13 @@
   .revenue { background: var(--black); }
   .rev-table {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     border-collapse: collapse;
     margin-top: 1.5rem;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
   }
   .rev-table th, .rev-table td {
-    padding: 0.75rem;
+    padding: 0.85rem 0.6rem;
     text-align: right;
     border-bottom: 1px solid var(--mid-gray);
   }
@@ -680,8 +682,8 @@
   .trigger-card.hold .verdict { color: #c0392b; }
   .trigger-card p {
     color: var(--light-gray);
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 1.15rem;
+    line-height: 1.55;
   }
 
   /* FULL VISION */
@@ -717,7 +719,7 @@
   }
   .vision-phases .what {
     font-family: 'Instrument Serif', serif;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     color: var(--light-gray);
   }
   .vision-phases .amt {
@@ -736,12 +738,12 @@
   }
   .decisions ol li {
     counter-increment: step;
-    padding: 1.25rem 0 1.25rem 4rem;
+    padding: 1.4rem 0 1.4rem 4rem;
     position: relative;
     border-bottom: 1px solid var(--mid-gray);
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     color: var(--light-gray);
-    line-height: 1.5;
+    line-height: 1.55;
   }
   .decisions ol li::before {
     content: counter(step);
@@ -779,7 +781,7 @@
     color: var(--orange);
     margin-bottom: 0.75rem;
   }
-  .open-deps p { color: var(--light-gray); font-size: 1rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .open-deps p { color: var(--light-gray); font-size: 1.15rem; line-height: 1.6; margin-bottom: 0.5rem; }
 
   /* CLOSING */
   .closing {
@@ -794,10 +796,11 @@
   .closing p {
     font-family: 'Instrument Serif', serif;
     font-style: italic;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     color: var(--light-gray);
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto 1rem;
+    line-height: 1.5;
   }
   .closing .meta {
     margin-top: 3rem;
@@ -1068,12 +1071,12 @@
         </ul>
 
         <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em; margin-top: 2rem;">GEOGRAPHY</h3>
-        <p class="body-text" style="font-size: 1rem;">
+        <p class="body-text" style="font-size: 1.2rem;">
           99.2% US · Florida #1 origin (~11%) · Midwest dominant (IL, OH, MI, TX 5-6% each) · 86% one-and-done · Affluent suburb postal codes (Brentwood TN, Sugar Land TX, Carmel IN, Palm Beach FL).
         </p>
 
         <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em; margin-top: 2rem;">SEASONALITY</h3>
-        <p class="body-text" style="font-size: 1rem;">
+        <p class="body-text" style="font-size: 1.2rem;">
           July 23.5% · June 17.9% · August 14.0% — summer is 55% of annual volume. October (foliage) is 8.6%. Validates Nick's seasonal curve almost exactly.
         </p>
       </div>
@@ -1108,22 +1111,22 @@
     <div class="two-col" style="margin-top: 2rem;">
       <div class="col">
         <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">CAPTURE-RATE MATH</h3>
-        <p class="body-text" style="font-size: 1.05rem;">
+        <p class="body-text" style="font-size: 1.25rem;">
           Current zip = 23K guests on a 4M TAM = <strong>0.58% capture rate</strong>.
         </p>
-        <p class="body-text" style="font-size: 1.05rem;">
+        <p class="body-text" style="font-size: 1.25rem;">
           At the same capture rate on a 10M expanded TAM: <strong class="orange-text">~58K AF guests/yr</strong> — right inside Nick's projected range.
         </p>
-        <p class="body-text" style="font-size: 1.05rem;">
+        <p class="body-text" style="font-size: 1.25rem;">
           Even with attrition to 0.4% capture: <strong class="white-text">~40K — close to Nick's Year 1 plan.</strong>
         </p>
       </div>
       <div class="col">
         <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">THE VOLUME THESIS</h3>
-        <p class="body-text" style="font-size: 1.05rem;">
+        <p class="body-text" style="font-size: 1.25rem;">
           Nick's proforma projects <strong>36K visitors Year 1, scaling to 77K by Year 4</strong>. The waiver-derived TAM math says that range is defensible — and arguably conservative on the upside.
         </p>
-        <p class="body-text" style="font-size: 1.05rem;">
+        <p class="body-text" style="font-size: 1.25rem;">
           <strong class="white-text">The volume case rests on AF being a meaningfully more inclusive product than the zipline.</strong> The waiver data is the evidence.
         </p>
       </div>
@@ -1324,7 +1327,7 @@
     <div class="two-col" style="margin-top: 3rem;">
       <div class="col">
         <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">FULL-VISION RETURNS</h3>
-        <p class="body-text" style="font-size: 1.05rem;">
+        <p class="body-text" style="font-size: 1.25rem;">
           Total capex (5-year): <strong>$25.5M</strong><br>
           5-yr cumulative contribution: <strong>$37.2M</strong><br>
           Simple 5-year ROI: <strong>1.46x</strong><br>
@@ -1334,7 +1337,7 @@
       </div>
       <div class="col">
         <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">PHASE 1 STANDALONE</h3>
-        <p class="body-text" style="font-size: 1.05rem;">
+        <p class="body-text" style="font-size: 1.25rem;">
           If Phase 1 stops at Year 1: AF revenue $2.5M, zipline lift $3.4M, total $5.9M from a $10.1M investment. Standalone payback ~3-4 years at the AF contribution margin. Even without Phase 2, this is a profitable bet — just slower compounding.
         </p>
       </div>
@@ -1408,13 +1411,13 @@
     <div class="two-col" style="margin-top: 2rem;">
       <div class="col">
         <h3 class="green-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">PATH A · BANK</h3>
-        <p class="body-text" style="font-size: 1.05rem;">
+        <p class="body-text" style="font-size: 1.25rem;">
           Construction-to-permanent loan. 70-75% LTV. CW puts up $6-8M equity (cash + land value). Rate ~7.5-8.5%. DSCR clears 1.25x minimum even in Year 1; comfortable 4.5x at steady state. <strong>Standard path. Local Smokies-corridor banks know tourism.</strong>
         </p>
       </div>
       <div class="col">
         <h3 class="orange-text" style="font-size: 1.1rem; letter-spacing: 0.1em;">PATH B · EQUITY PARTNER</h3>
-        <p class="body-text" style="font-size: 1.05rem;">
+        <p class="body-text" style="font-size: 1.25rem;">
           Investor capital for 25-50% equity. 15-25% IRR expectation. Possible multi-property structure (Smokies + other CW assets) for portfolio diversification. <strong>More expensive capital but shares downside risk; complicates governance permanently.</strong>
         </p>
       </div>
